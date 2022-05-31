@@ -1,8 +1,8 @@
 // Using jQuery because it's already included in the start code:
 const $searchInput =  $("#searchBar");
+const $gifArea = $(".randomImages")
 
 $("form").on("submit", async function(evt) {
-  
   evt.preventDefault();
   const searchTerm = $searchInput.val();
   $("#searchBar").val("")
@@ -12,8 +12,15 @@ $("form").on("submit", async function(evt) {
     'q': searchTerm,
   }})
 
-  console.log(response.data.data);
+  const resultsLength = response.data.data.length;
+  const randomNum = Math.floor(Math.random() * resultsLength);
+  const randomImg = response.data.data[randomNum].images.original.url
+  console.log(response.data.data[randomNum]);
+
+  const $newGIF = $(`<li><img src="${randomImg}" /> </li>`)
+  $gifArea.append($newGIF)
 })
+
 
 
 // async function getGIF() {
