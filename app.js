@@ -1,6 +1,6 @@
 // Using jQuery because it's already included in the start code:
-const $searchInput =  $("#searchBar");
-const $gifArea = $(".randomImages")
+const $searchInput = $("#searchBar");
+const $gifArea = $("#gif-area")
 
 $("form").on("submit", async function(evt) {
   evt.preventDefault();
@@ -15,21 +15,14 @@ $("form").on("submit", async function(evt) {
   const resultsLength = response.data.data.length;
   const randomNum = Math.floor(Math.random() * resultsLength);
   const randomImg = response.data.data[randomNum].images.original.url
-  console.log(response.data.data[randomNum]);
 
-  const $newGIF = $(`<li><img src="${randomImg}" /> </li>`)
+  const $newGIF = $(`<div class="col-md-4 p-3 gifImg"><img src="${randomImg}" class="mh-100 mw-100"> </div>`)
   $gifArea.append($newGIF)
 })
 
+$("#removeAllBtn").on("click", function(evt) {
+  $gifArea.empty();
+})
 
 
-// async function getGIF() {
-//   const auth = { params: { 
-//       'api_key': 'k2IplipIBli43X5EdY4NNy6dP5CiqKe0',
-//     }
-//   }
-//   const response = await axios.get("http://api.giphy.com/v1/gifs/random", auth);
-  
-//   console.log(response);
-// }
 
